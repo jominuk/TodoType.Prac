@@ -9,6 +9,6 @@ export interface StButtonProps {
   width: string;
   height: string;
   onClick?: () => void;
-  children: ReactNode;
+  children: React.ReactNode;
   borderRadius?: string;
 }
