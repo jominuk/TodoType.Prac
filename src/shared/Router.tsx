@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../pages/Home";
-import loadable from "@loadable/component";
-
-const Home = lod;
+import Home from "src/pages/Home";
 
 const Router = () => {
   return (
