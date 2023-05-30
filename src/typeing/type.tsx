@@ -12,3 +12,9 @@ export interface StButtonProps {
   children: React.ReactNode;
   borderRadius?: string;
 }
+
+export interface ITodo {
+  title: string;
+  body: string;
+  day: number | string;
+}

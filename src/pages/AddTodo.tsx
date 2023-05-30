@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
 import { useAddComment } from "src/api/todo";
+import { ITodo } from "src/typeing/type";
 
 const AddTodo = () => {
   const navigate = useNavigate();
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<ITodo>({
     title: "",
     body: "",
+    day: "",
   });
 
   const { mutate } = useAddComment();
@@ -32,6 +34,7 @@ const AddTodo = () => {
       title: input.title,
       body: input.body,
       isDone: false,
+      day: input.day,
     };
 
     mutate(todo);
@@ -39,6 +42,7 @@ const AddTodo = () => {
     setInput({
       title: "",
       body: "",
+      day: "",
     });
     navigate("/");
   };
@@ -47,6 +51,14 @@ const AddTodo = () => {
     <Addcontainer>
       <AddBox>
         <form onSubmit={onSubmitHandler}>
+          <DayInput
+            type="text"
+            name="day"
+            value={input.day}
+            onChange={onChangeHandler}
+            placeholder="날짜"
+            required
+          />
           <TitleInput
             type="text"
             name="title"
@@ -84,31 +96,6 @@ const AddTodo = () => {
   );
 };
 
-const BucketAddButton = styled.button`
-  width: 13rem;
-  height: 40px;
-  border-color: blue;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.1);
-    background-color: powderblue;
-  }
-  border-radius: 10px;
-`;
-const StRed = styled.div<{ length: number }>`
-  display: ${({ length }) => (length > 2 && length <= 10 ? "none" : "block")};
-  color: #e74c3c;
-  font-weight: 600;
-  position: absolute;
-`;
-
-const StRed2 = styled.div<{ length: number }>`
-  display: ${({ length }) => (length > 0 ? "none" : "block")};
-  color: #e74c3c;
-  font-weight: 600;
-  position: absolute;
-`;
-
 const Addcontainer = styled.div`
   width: 100%;
   height: 90vh;
@@ -120,9 +107,17 @@ const Addcontainer = styled.div`
 const AddBox = styled.div`
   width: 60%;
   height: 32rem;
-  background-color: teal;
+  background-color: #179e9e;
   border-radius: 8px;
   padding: 4.5rem 5rem 5rem 5rem;
+`;
+
+const DayInput = styled.input`
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border-color: white;
+  width: 100px;
+  height: 20px;
 `;
 
 const TitleInput = styled.input`
@@ -132,6 +127,13 @@ const TitleInput = styled.input`
   border: 0px;
   font-size: 2rem;
   padding-left: 1rem;
+`;
+
+const StRed = styled.div<{ length: number }>`
+  display: ${({ length }) => (length > 2 && length <= 10 ? "none" : "block")};
+  color: #e74c3c;
+  font-weight: 600;
+  position: absolute;
 `;
 
 const BodoyInput = styled.textarea<{ type: string }>`
@@ -146,6 +148,25 @@ const BodoyInput = styled.textarea<{ type: string }>`
     font-size: 2rem;
     font-weight: 600;
   }
+`;
+
+const StRed2 = styled.div<{ length: number }>`
+  display: ${({ length }) => (length > 0 ? "none" : "block")};
+  color: #e74c3c;
+  font-weight: 600;
+  position: absolute;
+`;
+
+const BucketAddButton = styled.button`
+  width: 13rem;
+  height: 40px;
+  border-color: blue;
+  cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+    background-color: powderblue;
+  }
+  border-radius: 10px;
 `;
 
 const BtnBox = styled.div`
