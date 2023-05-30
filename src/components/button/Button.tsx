@@ -24,6 +24,10 @@ const Button = styled.button<StButtonProps>`
   border-radius: ${({ borderRadius }) => borderRadius};
   background-color: white;
   cursor: pointer;
+  :hover {
+    transform: scale(1.1);
+    background-color: powderblue;
+  }
 `;
 
 export default StButton;

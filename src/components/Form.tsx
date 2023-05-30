@@ -7,8 +7,9 @@ import { StButtonProps } from "src/typeing/type";
 const Form = (props: { button: StButtonProps }) => {
   const navigate = useNavigate();
   const onClickHandler = useCallback(() => {
-    navigate("/");
-  }, []);
+    navigate("/add");
+  }, [navigate]);
+
   return (
     <StAddDiv>
       <StButton onClick={onClickHandler} {...props.button}>
@@ -24,10 +25,7 @@ Form.defaultProps = {
     height: "70px",
     cursor: "pointer",
     borderRadius: "17px",
-    backgroundColor: "teal",
-    width: "400px",
-    color: "#fff",
-    fontWeight: 700,
+    width: "200px",
   },
 };
 

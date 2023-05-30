@@ -1,16 +1,10 @@
 {
-  "posts": [
+  "todos": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
-  "comments": [
-    {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "1685408587419.0732",
+      "title": "서버를",
+      "body": "실행안했어요",
+      "isDone": false
     }
   ]
 }
