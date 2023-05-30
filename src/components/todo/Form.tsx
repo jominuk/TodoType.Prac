@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import StButton from "./button/Button";
+import StButton from "../button/Button";
 import { StButtonProps } from "src/typeing/type";
 
 const Form = (props: { button: StButtonProps }) => {

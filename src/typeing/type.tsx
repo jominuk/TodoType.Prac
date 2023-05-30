@@ -16,5 +16,6 @@ export interface StButtonProps {
 export interface ITodo {
   title: string;
   body: string;
-  day: number | string;
+  day?: number | string;
+  isDone?: boolean;
 }
