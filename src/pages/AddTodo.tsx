@@ -2,26 +2,36 @@ import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
-import { addTodoApi } from "src/api/todo";
+import { TodoApi } from "src/api/todo";
 import { ITodo } from "src/typeing/type";
-import { useMutation } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 const AddTodo = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient() as QueryClient;
   const [input, setInput] = useState<ITodo>({
     title: "",
     body: "",
     day: "",
   });
 
-  const { mutate } = useMutation(async (todo: ITodo) => {
-    try {
-      await addTodoApi.post(todo);
-      alert("내 일정 등록 완료!!");
-    } catch (err) {
-      console.log(err);
+  const { mutate } = useMutation(
+    ["todos"],
+    (todo: ITodo) => TodoApi.post(todo),
+    {
+      onSuccess: () => {
+        window.alert("내 일정 등록 완료!!");
+        queryClient.invalidateQueries({ QueryKey: "todos" });
+      },
+      onError: (err) => {
+        console.log(err);
+      },
     }
-  });
+  );
 
   const onChangeHandler = useCallback((e: any) => {
     const { name, value } = e.target;
@@ -46,6 +56,8 @@ const AddTodo = () => {
     };
 
     mutate(todo);
+
+    console.log(todo);
 
     setInput({
       title: "",
