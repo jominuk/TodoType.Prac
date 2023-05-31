@@ -2,8 +2,9 @@ import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
-import { useAddComment } from "src/api/todo";
+import { addTodoApi } from "src/api/todo";
 import { ITodo } from "src/typeing/type";
+import { useMutation } from "@tanstack/react-query";
 
 const AddTodo = () => {
   const navigate = useNavigate();
@@ -13,7 +14,14 @@ const AddTodo = () => {
     day: "",
   });
 
-  const { mutate } = useAddComment();
+  const { mutate } = useMutation(async (todo: ITodo) => {
+    try {
+      await addTodoApi.post(todo);
+      alert("내 일정 등록 완료!!");
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
   const onChangeHandler = useCallback((e: any) => {
     const { name, value } = e.target;

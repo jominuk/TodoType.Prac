@@ -14,6 +14,7 @@ export interface StButtonProps {
 }
 
 export interface ITodo {
+  id?: string;
   title: string;
   body: string;
   day?: number | string;
