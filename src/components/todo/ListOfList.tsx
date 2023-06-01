@@ -1,14 +1,29 @@
-import React, { FC } from "react";
+import React, { FC, useCallback } from "react";
 import styled from "styled-components";
 // import { Link } from "react-router-dom";
 import StButton from "../button/Button";
-import { ListOfListProps } from "src/typeing/type";
+import { ITodo, ListOfListProps } from "src/typeing/type";
+import { useMutation } from "@tanstack/react-query";
+import { TodoApi } from "src/api/todo";
 
-const ListOfList: FC<ListOfListProps> = ({
-  borderColor,
+const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
+  const { mutate: DeleteMutation } = useMutation(
+    ["todos"],
+    (todo: ITodo) => TodoApi.delete(todo),
+    {
+      onSuccess: () => {
+        alert("삭제 했어요");
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    }
+  );
 
-  todo,
-}) => {
+  const onDeleteButton = useCallback((id: any) => {
+    DeleteMutation(id);
+  }, []);
+
   return (
     <StTodoContainer borderColor={borderColor}>
       {/* <StLink to={`/${todo.id}`} key={todo.id}>
@@ -29,10 +44,9 @@ const ListOfList: FC<ListOfListProps> = ({
           width="50%"
           height="40px"
           borderColor="red"
-          // onClick={() => {
-          //   onDeleteButton(todo.id)
-
-          // }}
+          onClick={() => {
+            onDeleteButton(todo.id);
+          }}
         >
           삭제하기
         </StButton>

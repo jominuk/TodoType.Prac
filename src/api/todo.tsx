@@ -11,4 +11,8 @@ export const TodoApi = {
     const response = await instance.get("/todos");
     return response.data;
   },
+
+  delete: async (todoId: ITodo): Promise<void> => {
+    const response = await instance.delete(`/todos/${todoId}`);
+  },
 };

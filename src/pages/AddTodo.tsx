@@ -19,7 +19,7 @@ const AddTodo = () => {
     (todo: ITodo) => TodoApi.post(todo),
     {
       onSuccess: () => {
-        window.alert("내 일정 등록 완료!!");
+        alert("내 일정 등록 완료!!");
       },
       onError: (err) => {
         console.log(err);

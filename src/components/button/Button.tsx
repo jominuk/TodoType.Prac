@@ -15,6 +15,7 @@ const StButton = (props: StButtonProps) => {
 StButton.defaultProps = {
   borderRadius: "10px",
 };
+// 기본 설정을 10px로 지정
 
 const Button = styled.button<StButtonProps>`
   border: 2px solid ${(props) => props.borderColor};
