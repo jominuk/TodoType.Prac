@@ -1,28 +1,22 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import StButton from "../button/Button";
 import { ListOfListProps } from "src/typeing/type";
 
 const ListOfList: FC<ListOfListProps> = ({
   borderColor,
-  backgroundColor,
+
   todo,
 }) => {
   return (
-    <StTodoContainer
-      borderColor={borderColor}
-      backgroundColor={backgroundColor}
-    >
-      <StLink to={`/${todo.id}`} key={todo.id}>
+    <StTodoContainer borderColor={borderColor}>
+      {/* <StLink to={`/${todo.id}`} key={todo.id}>
         <div>상세보기</div>
-      </StLink>
+      </StLink> */}
       <div>
-        <h2 className="todo-title">
-          {todo.title.length > 12
-            ? todo.title.substring(0, 12) + "..."
-            : todo.title}
-        </h2>
+        <h2>{todo.title}</h2>
+
         <div>
           {todo.body.length > 18
             ? todo.body.substring(0, 18) + "..."
@@ -58,7 +52,6 @@ const ListOfList: FC<ListOfListProps> = ({
 
 const StTodoContainer = styled.div<{
   borderColor: string;
-  backgroundColor: string;
 }>`
   width: 315px;
   height: 180px;
@@ -66,15 +59,14 @@ const StTodoContainer = styled.div<{
   min-height: 150px;
   border-radius: 12px;
   padding: 12px 24px 24px 24px;
-  background-color: ${({ backgroundColor }) => backgroundColor};
 `;
 
-const StLink = styled(Link)`
-  text-decoration: none;
-  color: teal;
-  display: flex;
-  justify-content: right;
-`;
+// const StLink = styled(Link)`
+//   text-decoration: none;
+//   color: teal;
+//   display: flex;
+//   justify-content: right;
+// `;
 
 const StDialogFooter = styled.footer`
   display: flex;

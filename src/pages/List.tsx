@@ -21,14 +21,7 @@ const List = () => {
       <StListWrapper>
         {Array.isArray(data) &&
           data.map((todo) => {
-            return (
-              <ListOfList
-                todo={todo}
-                key={todo.id}
-                borderColor="teal"
-                backgroundColor="white"
-              />
-            );
+            return <ListOfList todo={todo} key={todo.id} borderColor="teal" />;
           })}
       </StListWrapper>
 

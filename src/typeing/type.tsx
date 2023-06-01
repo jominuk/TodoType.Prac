@@ -23,6 +23,5 @@ export interface ITodo {
 
 export interface ListOfListProps {
   borderColor: string;
-  backgroundColor: string;
   todo: ITodo;
 }
