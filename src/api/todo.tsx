@@ -7,8 +7,8 @@ export const TodoApi = {
     return response.data;
   },
 
-  get: async (payload: ITodo): Promise<void> => {
-    const response = await instance.get(`/todos/${payload}`);
+  get: async (): Promise<void> => {
+    const response = await instance.get("/todos");
     return response.data;
   },
 };

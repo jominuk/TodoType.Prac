@@ -20,3 +20,9 @@ export interface ITodo {
   day?: number | string;
   isDone?: boolean;
 }
+
+export interface ListOfListProps {
+  borderColor: string;
+  backgroundColor: string;
+  todo: ITodo;
+}
