@@ -15,6 +15,7 @@ const ListOfList: FC<ListOfListProps> = ({
         <div>상세보기</div>
       </StLink> */}
       <div>
+        <div className="todo-day">{todo.day}</div>
         <h2>{todo.title}</h2>
 
         <div>
@@ -59,6 +60,10 @@ const StTodoContainer = styled.div<{
   min-height: 150px;
   border-radius: 12px;
   padding: 12px 24px 24px 24px;
+
+  .todo-day {
+    font-size: 11px;
+  }
 `;
 
 // const StLink = styled(Link)`
