@@ -23,8 +23,6 @@ const Detail = () => {
     return <div>Error fetching data</div>;
   }
 
-  console.log(todo);
-
   return (
     <>
       <StContainer>

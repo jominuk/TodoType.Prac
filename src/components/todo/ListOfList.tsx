@@ -48,10 +48,6 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     [StatusMutation]
   );
 
-  // state.todos = state.todos.map((user) =>
-  //       user.id === action.payload ? { ...user, isDone: !user.isDone } : user
-  //     )
-
   return (
     <StTodoContainer borderColor={borderColor}>
       <StLink to={`/${todo.id}`} key={todo.id}>
