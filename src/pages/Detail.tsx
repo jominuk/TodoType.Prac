@@ -3,19 +3,18 @@ import styled from "styled-components";
 import StButton from "src/components/button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { TodoApi } from "src/api/todo";
-import { ITodo } from "src/typeing/type";
 import { useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
 
-  console.log(id);
-
   const {
     data: todo,
     isLoading,
     isError,
-  } = useQuery(["todos"], (id: any) => TodoApi.detail(id));
+  } = useQuery(["todos", id], () =>
+    id ? TodoApi.detail(id) : Promise.reject(Error("ID is undefined"))
+  );
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -24,9 +23,11 @@ const Detail = () => {
     return <div>Error fetching data</div>;
   }
 
+  console.log(todo);
+
   return (
     <>
-      {/* <StContainer>
+      <StContainer>
         <StDialog>
           <div>
             <StDialogHeader>
@@ -56,7 +57,7 @@ const Detail = () => {
             <StBody>{todo.body}</StBody>
           </div>
         </StDialog>
-      </StContainer> */}
+      </StContainer>
     </>
   );
 };

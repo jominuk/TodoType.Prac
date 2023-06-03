@@ -9,7 +9,7 @@ import { TodoApi } from "src/api/todo";
 const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
   const { mutate: DeleteMutation } = useMutation(
     ["todos"],
-    (todo: ITodo) => TodoApi.delete(todo),
+    (id: ITodo) => TodoApi.delete(id),
     {
       onSuccess: () => {
         alert("삭제해쓰");
