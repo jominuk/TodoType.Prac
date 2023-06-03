@@ -4,6 +4,7 @@ import Home from "src/pages/Home";
 import Header from "src/components/ui/Header";
 import Layout from "src/components/ui/Layout";
 import AddTodo from "src/pages/AddTodo";
+import Detail from "src/pages/Detail";
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<AddTodo />} />
+          <Route path="/:id" element={<Detail />} />
         </Routes>
       </Layout>
     </BrowserRouter>

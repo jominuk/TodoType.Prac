@@ -1,6 +1,6 @@
 import React, { FC, useCallback } from "react";
 import styled from "styled-components";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import StButton from "../button/Button";
 import { ITodo, ListOfListProps } from "src/typeing/type";
 import { useMutation } from "@tanstack/react-query";
@@ -12,7 +12,7 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     (todo: ITodo) => TodoApi.delete(todo),
     {
       onSuccess: () => {
-        alert("삭제 했어요");
+        alert("삭제해쓰");
       },
       onError: (err) => {
         console.log(err);
@@ -20,15 +20,43 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     }
   );
 
-  const onDeleteButton = useCallback((id: any) => {
-    DeleteMutation(id);
-  }, []);
+  const { mutate: StatusMutation } = useMutation(
+    ["todos"],
+    (id: ITodo) => TodoApi.status(id),
+    {
+      onSuccess: (data: any) => {
+        // const isDone = data.isDone;
+        // isDone === false ? alert("고생했어") : alert("메롱");
+      },
+      onError: (err) => {
+        console.log(err);
+      },
+    }
+  );
+
+  const onDeleteButton = useCallback(
+    (id: any) => {
+      DeleteMutation(id);
+    },
+    [DeleteMutation]
+  );
+
+  const onToggleStatusTodo = useCallback(
+    ({ id, isDone }: any) => {
+      StatusMutation(id, isDone);
+    },
+    [StatusMutation]
+  );
+
+  // state.todos = state.todos.map((user) =>
+  //       user.id === action.payload ? { ...user, isDone: !user.isDone } : user
+  //     )
 
   return (
     <StTodoContainer borderColor={borderColor}>
-      {/* <StLink to={`/${todo.id}`} key={todo.id}>
+      <StLink to={`/${todo.id}`} key={todo.id}>
         <div>상세보기</div>
-      </StLink> */}
+      </StLink>
       <div>
         <div className="todo-day">{todo.day}</div>
         <h2>{todo.title}</h2>
@@ -54,9 +82,9 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
           width="50%"
           height="40px"
           borderColor="green"
-          // onClick={() =>
-          //   onToggleStatusTodo({ id: todo.id, isDone: todo.isDone })
-          // }
+          onClick={() =>
+            onToggleStatusTodo({ id: todo.id, isDone: todo.isDone })
+          }
         >
           {todo.isDone ? "취소" : "완료"}
         </StButton>
@@ -80,12 +108,12 @@ const StTodoContainer = styled.div<{
   }
 `;
 
-// const StLink = styled(Link)`
-//   text-decoration: none;
-//   color: teal;
-//   display: flex;
-//   justify-content: right;
-// `;
+const StLink = styled(Link)`
+  text-decoration: none;
+  color: teal;
+  display: flex;
+  justify-content: right;
+`;
 
 const StDialogFooter = styled.footer`
   display: flex;

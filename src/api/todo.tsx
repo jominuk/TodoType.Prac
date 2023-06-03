@@ -12,7 +12,24 @@ export const TodoApi = {
     return response.data;
   },
 
-  delete: async (todoId: ITodo): Promise<void> => {
-    const response = await instance.delete(`/todos/${todoId}`);
+  delete: async (id: ITodo): Promise<void> => {
+    const response = await instance.delete(`/todos/${id}`);
+    return response.data;
+  },
+
+  status: async (id: ITodo): Promise<void> => {
+    const response = await instance.patch(`/todos/${id}`, {
+      isDone: !id.isDone,
+    });
+    return response.data;
+  },
+
+  detail: async (id: ITodo): Promise<void> => {
+    const response = await instance.get(`/todos/${id}`);
+    return response.data;
   },
 };
+
+// state.todos = state.todos.map((user) =>
+//         user.id === action.payload ? { ...user, isDone: !user.isDone } : user
+//       );
