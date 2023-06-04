@@ -24,9 +24,8 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     ["todos"],
     (id: ITodo) => TodoApi.status(id),
     {
-      onSuccess: (data: any) => {
-        // const isDone = data.isDone;
-        // isDone === false ? alert("고생했어") : alert("메롱");
+      onSuccess: (data) => {
+        console.log(data);
       },
       onError: (err) => {
         console.log(err);
@@ -47,6 +46,10 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     },
     [StatusMutation]
   );
+
+  // state.todos = state.todos.map((user) =>
+  //         user.id === action.payload ? { ...user, isDone: !user.isDone } : user
+  //       );
 
   return (
     <StTodoContainer borderColor={borderColor}>

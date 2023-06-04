@@ -29,7 +29,3 @@ export const TodoApi = {
     return response.data;
   },
 };
-
-// state.todos = state.todos.map((user) =>
-//         user.id === action.payload ? { ...user, isDone: !user.isDone } : user
-//       );
