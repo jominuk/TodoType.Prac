@@ -2,7 +2,7 @@ import React, { FC, useCallback } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import StButton from "../button/Button";
-import { Detail, ITodo, ListOfListProps } from "src/typeing/type";
+import { ITodo, ListOfListProps, ITodoStatus } from "src/typeing/type";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TodoApi } from "src/api/todo";
 
@@ -25,7 +25,7 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
 
   const { mutate: StatusMutation } = useMutation(
     ["todos"],
-    (id: Detail) => TodoApi.status(id),
+    (id: ITodoStatus) => TodoApi.status(id),
     {
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ["todos"] });

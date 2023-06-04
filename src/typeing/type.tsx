@@ -21,10 +21,7 @@ export interface ITodo {
   isDone?: boolean;
 }
 
-export interface Detail {
-  id?: string | number;
-  isDone?: boolean;
-}
+export type ITodoStatus = Omit<ITodo, "title" | "body" | "day">;
 
 export interface ListOfListProps {
   borderColor: string;
