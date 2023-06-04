@@ -1,6 +1,5 @@
 import { instance } from "./instance";
-import { ITodo } from "src/typeing/type";
-import { Detail } from "src/typeing/type";
+import { ITodo, Detail } from "src/typeing/type";
 
 export const TodoApi = {
   post: async (todo: ITodo): Promise<ITodo> => {
@@ -25,7 +24,7 @@ export const TodoApi = {
     return response.data;
   },
 
-  detail: async (id: string): Promise<ITodo> => {
+  detail: async (id: string | number): Promise<ITodo> => {
     const response = await instance.get(`/todos/${id}`);
     return response.data;
   },

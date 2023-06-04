@@ -4,10 +4,11 @@ import styled from "styled-components";
 import StButton from "src/components/button/Button";
 import { TodoApi } from "src/api/todo";
 import { ITodo } from "src/typeing/type";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const AddTodo = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [input, setInput] = useState<ITodo>({
     title: "",
     body: "",
@@ -19,6 +20,7 @@ const AddTodo = () => {
     (todo: ITodo) => TodoApi.post(todo),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["todos"] });
         alert("내 일정 등록 완료!!");
       },
       onError: (err) => {
