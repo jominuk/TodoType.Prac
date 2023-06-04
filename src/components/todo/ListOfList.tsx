@@ -2,16 +2,19 @@ import React, { FC, useCallback } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import StButton from "../button/Button";
-import { ITodo, ListOfListProps } from "src/typeing/type";
-import { useMutation } from "@tanstack/react-query";
+import { Detail, ITodo, ListOfListProps } from "src/typeing/type";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { TodoApi } from "src/api/todo";
 
 const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
+  const queryClient = useQueryClient();
+
   const { mutate: DeleteMutation } = useMutation(
     ["todos"],
     (id: ITodo) => TodoApi.delete(id),
     {
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["todos"] });
         alert("삭제해쓰");
       },
       onError: (err) => {
@@ -22,10 +25,15 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
 
   const { mutate: StatusMutation } = useMutation(
     ["todos"],
-    (id: ITodo) => TodoApi.status(id),
+    (id: Detail) => TodoApi.status(id),
     {
       onSuccess: (data) => {
-        console.log(data);
+        queryClient.invalidateQueries({ queryKey: ["todos"] });
+        if (data.isDone === false) {
+          return alert("다시 해보자");
+        } else {
+          return alert("잘했어^^!");
+        }
       },
       onError: (err) => {
         console.log(err);
@@ -42,14 +50,10 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
 
   const onToggleStatusTodo = useCallback(
     ({ id, isDone }: any) => {
-      StatusMutation(id, isDone);
+      StatusMutation({ id, isDone });
     },
     [StatusMutation]
   );
-
-  // state.todos = state.todos.map((user) =>
-  //         user.id === action.payload ? { ...user, isDone: !user.isDone } : user
-  //       );
 
   return (
     <StTodoContainer borderColor={borderColor}>

@@ -1,5 +1,6 @@
 import { instance } from "./instance";
 import { ITodo } from "src/typeing/type";
+import { Detail } from "src/typeing/type";
 
 export const TodoApi = {
   post: async (todo: ITodo): Promise<ITodo> => {
@@ -17,9 +18,9 @@ export const TodoApi = {
     return response.data;
   },
 
-  status: async (id: ITodo): Promise<ITodo> => {
-    const response = await instance.patch(`/todos/${id}`, {
-      isDone: !id.isDone,
+  status: async (payload: Detail): Promise<ITodo> => {
+    const response = await instance.patch(`/todos/${payload.id}`, {
+      isDone: !payload.isDone,
     });
     return response.data;
   },

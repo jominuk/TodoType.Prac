@@ -14,10 +14,15 @@ export interface StButtonProps {
 }
 
 export interface ITodo {
-  id?: string;
+  id?: string | number;
   title: string;
   body: string;
   day?: number | string;
+  isDone?: boolean;
+}
+
+export interface Detail {
+  id?: string | number;
   isDone?: boolean;
 }
 
