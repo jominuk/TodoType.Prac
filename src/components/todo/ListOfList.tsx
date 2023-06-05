@@ -15,7 +15,7 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
-        alert("삭제해쓰");
+        alert("삭제..😖");
       },
       onError: (err) => {
         console.log(err);
@@ -30,9 +30,9 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
       onSuccess: (data) => {
         queryClient.invalidateQueries({ queryKey: ["todos"] });
         if (data.isDone === false) {
-          return alert("다시 해보자");
+          return alert("다시 해보자!✊");
         } else {
-          return alert("잘했어^^!");
+          return alert("잘했어!✌️");
         }
       },
       onError: (err) => {

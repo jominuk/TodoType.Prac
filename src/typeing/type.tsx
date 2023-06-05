@@ -5,11 +5,11 @@ export interface LayoutProps {
 }
 
 export interface StButtonProps {
-  borderColor: string;
-  width: string;
-  height: string;
+  borderColor?: string;
+  width?: string;
+  height?: string;
   onClick?: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   borderRadius?: string;
 }
 
@@ -21,7 +21,15 @@ export interface ITodo {
   isDone?: boolean;
 }
 
-export type ITodoStatus = Omit<ITodo, "title" | "body" | "day">;
+export type ITodoStatus = Pick<ITodo, "id" | "isDone">;
+
+export interface ITodoEdit {
+  id?: string | number;
+  title?: string;
+  body?: string;
+}
+
+export type ITodoEditGet = Pick<ITodoEdit, "id">;
 
 export interface ListOfListProps {
   borderColor: string;

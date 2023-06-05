@@ -3,10 +3,11 @@ import styled from "styled-components";
 import StButton from "src/components/button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { TodoApi } from "src/api/todo";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const Detail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const {
     data: todo,
@@ -29,13 +30,13 @@ const Detail = () => {
         <StDialog>
           <div>
             <StDialogHeader>
-              <div>ID :{todo.id}</div>
+              <div>{todo.day}</div>
               <StButtonGroup>
                 <StButton
                   borderColor="black"
                   width="70px"
                   height="50px"
-                  //   onClick={() => navigate("/EditTodo")}
+                  onClick={() => navigate(`/edit/${todo.id}`)}
                 >
                   수정하기
                 </StButton>
@@ -43,9 +44,9 @@ const Detail = () => {
                   borderColor="teal"
                   width="70px"
                   height="50px"
-                  //   onClick={() => {
-                  //     navigate("/");
-                  //   }}
+                  onClick={() => {
+                    navigate("/");
+                  }}
                 >
                   이전으로
                 </StButton>

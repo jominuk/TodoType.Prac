@@ -1,7 +1,6 @@
 import React from "react";
 import Form from "src/components/todo/Form";
-import List from "src/pages/List";
-import { ITodo } from "src/typeing/type";
+import List from "src/pages/todo/List";
 
 const Home = () => {
   return (
