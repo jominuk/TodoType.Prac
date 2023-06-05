@@ -1,5 +1,5 @@
 import { instance } from "./instance";
-import { ITodo, ITodoStatus, ITodoEdit } from "src/typeing/type";
+import { ITodo, ITodoStatus, ITodoEdit, IComments } from "src/typeing/type";
 
 export const TodoApi = {
   post: async (todo: ITodo): Promise<ITodo> => {
@@ -35,5 +35,12 @@ export const TodoApi = {
       body: payload.body,
     });
     return response.data;
+  },
+};
+
+export const CommentApi = {
+  post: async (comment: IComments): Promise<void> => {
+    const res = await instance.post("/comments", comment);
+    return res.data;
   },
 };

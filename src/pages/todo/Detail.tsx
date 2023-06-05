@@ -4,6 +4,7 @@ import StButton from "src/components/button/Button";
 import { useQuery } from "@tanstack/react-query";
 import { TodoApi } from "src/api/todo";
 import { useNavigate, useParams } from "react-router-dom";
+import Comments from "../comment/Comments";
 
 const Detail = () => {
   const { id } = useParams();
@@ -57,6 +58,8 @@ const Detail = () => {
           </div>
         </StDialog>
       </StContainer>
+
+      <Comments />
     </>
   );
 };

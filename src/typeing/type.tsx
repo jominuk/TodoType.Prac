@@ -29,9 +29,16 @@ export interface ITodoEdit {
   body?: string;
 }
 
-export type ITodoEditGet = Pick<ITodoEdit, "id">;
-
 export interface ListOfListProps {
   borderColor: string;
   todo: ITodo;
+}
+
+export interface IComments {
+  id?: number | string;
+  comment?: string;
+}
+
+export interface ListOfListProp {
+  comment: IComments;
 }

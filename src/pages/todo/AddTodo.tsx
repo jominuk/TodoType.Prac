@@ -40,7 +40,7 @@ const AddTodo = () => {
   const onSubmitHandler = (e: any) => {
     e.preventDefault();
     if (input.title.length < 2 || input.title.length > 10) {
-      return alert("제목을 2-10글자 사이로 넣어주세요");
+      return alert("제목을 2-10글자 사이로 입력해주세요");
     }
 
     const todo = {
