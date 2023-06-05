@@ -21,6 +21,10 @@ export interface ITodo {
   isDone?: boolean;
 }
 
+export interface ITodoid {
+  id: string | number | undefined;
+}
+
 export type ITodoStatus = Pick<ITodo, "id" | "isDone">;
 
 export interface ITodoEdit {
@@ -37,8 +41,4 @@ export interface ListOfListProps {
 export interface IComments {
   id?: number | string;
   comment?: string;
-}
-
-export interface ListOfListProp {
-  comment: IComments;
 }

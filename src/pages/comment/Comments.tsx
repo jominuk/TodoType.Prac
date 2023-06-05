@@ -4,6 +4,7 @@ import StButton from "src/components/button/Button";
 import { useMutation } from "@tanstack/react-query";
 import { CommentApi } from "src/api/todo";
 import { IComments } from "src/typeing/type";
+import CommentList from "./CommentList";
 import { useParams } from "react-router-dom";
 
 const Comments = () => {
@@ -22,8 +23,9 @@ const Comments = () => {
 
     const comm = {
       comment: comment.commentBody,
-      id: `comments_${new Date().getTime() + Math.random()}`,
+      id: `${new Date().getTime() + Math.random()}`,
       date: new Date().toLocaleDateString(),
+      postId: id,
     };
 
     mutate(comm);
@@ -34,29 +36,33 @@ const Comments = () => {
   };
 
   return (
-    <StCommentInputGroup>
-      <StCommentInput
-        type="text"
-        name="commentBody"
-        value={comment.commentBody || ""}
-        onChange={(e) => {
-          const { value } = e.target;
-          setComment({
-            ...comment,
-            commentBody: value,
-          });
-        }}
-        placeholder="10글자 입력 가능합니다."
-      />
-      <StButton
-        borderColor="teal"
-        width="100px"
-        height="40px"
-        onClick={onClickHandler}
-      >
-        작성하기
-      </StButton>
-    </StCommentInputGroup>
+    <>
+      <StCommentInputGroup>
+        <StCommentInput
+          type="text"
+          name="commentBody"
+          value={comment.commentBody || ""}
+          onChange={(e) => {
+            const { value } = e.target;
+            setComment({
+              ...comment,
+              commentBody: value,
+            });
+          }}
+          placeholder="10글자 입력 가능합니다."
+        />
+        <StButton
+          borderColor="teal"
+          width="100px"
+          height="40px"
+          onClick={onClickHandler}
+        >
+          작성하기
+        </StButton>
+      </StCommentInputGroup>
+
+      <CommentList />
+    </>
   );
 };
 

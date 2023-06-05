@@ -9,20 +9,6 @@ import { TodoApi } from "src/api/todo";
 const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
   const queryClient = useQueryClient();
 
-  const { mutate: DeleteMutation } = useMutation(
-    ["todos"],
-    (id: ITodo) => TodoApi.delete(id),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["todos"] });
-        alert("삭제..😖");
-      },
-      onError: (err) => {
-        console.log(err);
-      },
-    }
-  );
-
   const { mutate: StatusMutation } = useMutation(
     ["todos"],
     (id: ITodoStatus) => TodoApi.status(id),
@@ -41,12 +27,12 @@ const ListOfList: FC<ListOfListProps> = ({ borderColor, todo }) => {
     }
   );
 
-  const onDeleteButton = useCallback(
-    (id: any) => {
-      DeleteMutation(id);
-    },
-    [DeleteMutation]
-  );
+  const onDeleteButton = useCallback((id: any) => {
+    TodoApi.delete(id);
+    alert("삭제..😖");
+    queryClient.invalidateQueries({ queryKey: ["todos"] });
+    // DeleteMutation(id);
+  }, []);
 
   const onToggleStatusTodo = useCallback(
     ({ id, isDone }: any) => {

@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { TodoApi } from "src/api/todo";
 import { useNavigate, useParams } from "react-router-dom";
 import Comments from "../comment/Comments";
+import CommentList from "../comment/CommentList";
 
 const Detail = () => {
   const { id } = useParams();

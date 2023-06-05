@@ -39,8 +39,22 @@ export const TodoApi = {
 };
 
 export const CommentApi = {
-  post: async (comment: IComments): Promise<void> => {
-    const res = await instance.post("/comments", comment);
+  post: async (payload: any): Promise<void> => {
+    const res = await instance.post(
+      `/todo/${payload.postId}/comments`,
+      payload
+    );
+    return res.data;
+  },
+
+  get: async (postId: ITodo): Promise<ITodo> => {
+    console.log(postId);
+    const res = await instance.get(`/todos/${postId}/comments`);
+    return res.data;
+  },
+
+  delete: async (commentId: IComments): Promise<void> => {
+    const res = await instance.delete(`/comments/${commentId}`);
     return res.data;
   },
 };
