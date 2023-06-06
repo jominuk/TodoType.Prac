@@ -11,7 +11,9 @@ const CommentList = () => {
 
   const queryClient = useQueryClient();
 
-  const { data } = useQuery(["comments", id], (id: any) => CommentApi.get(id));
+  const { data } = useQuery(["comments", id], (todoId: any) =>
+    CommentApi.get(todoId)
+  );
 
   const onDeleteComment = useCallback((id: IComments) => {
     CommentApi.delete(id);

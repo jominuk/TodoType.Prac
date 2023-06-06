@@ -23,9 +23,9 @@ const Comments = () => {
 
     const comm = {
       comment: comment.commentBody,
-      id: `${new Date().getTime() + Math.random()}`,
+      id: `${new Date().getTime()}`,
       date: new Date().toLocaleDateString(),
-      postId: id,
+      todoId: id,
     };
 
     mutate(comm);
