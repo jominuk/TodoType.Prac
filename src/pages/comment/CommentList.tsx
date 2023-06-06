@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { CommentApi } from "src/api/todo";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
@@ -11,9 +11,7 @@ const CommentList = () => {
 
   const queryClient = useQueryClient();
 
-  const { data } = useQuery(["comments", id], (todoId: any) =>
-    CommentApi.get(todoId)
-  );
+  const { data } = useQuery(["comments", id], () => CommentApi.get(id), {});
 
   const onDeleteComment = useCallback((id: IComments) => {
     CommentApi.delete(id);

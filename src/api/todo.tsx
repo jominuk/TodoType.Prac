@@ -4,7 +4,7 @@ import {
   ITodoStatus,
   ITodoEdit,
   IComments,
-  ITodoid,
+  TodoComment,
 } from "src/typeing/type";
 
 export const TodoApi = {
@@ -46,12 +46,16 @@ export const TodoApi = {
 
 export const CommentApi = {
   post: async (comment: IComments): Promise<IComments> => {
-    const res = await instance.post("/comments", comment);
+    console.log(comment.todoId);
+    const res = await instance.post(
+      `/todos/${comment.todoId}/comments`,
+      comment
+    );
     return res.data;
   },
 
-  get: async (todoId: ITodoid): Promise<ITodoid> => {
-    const res = await instance.get("/comments");
+  get: async (todoId: any): Promise<void> => {
+    const res = await instance.get(`todos/${todoId}/comments`);
     return res.data;
   },
 

@@ -41,4 +41,10 @@ export interface ListOfListProps {
 export interface IComments {
   id?: number | string;
   comment?: string;
+  todoId?: number | string;
+}
+
+export interface TodoComment {
+  todoId?: number | string;
+  id?: number;
 }

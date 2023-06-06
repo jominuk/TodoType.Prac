@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CommentApi } from "src/api/todo";
 import { IComments } from "src/typeing/type";
 import CommentList from "./CommentList";
@@ -9,13 +9,20 @@ import { useParams } from "react-router-dom";
 
 const Comments = () => {
   const { id } = useParams();
+  const queryClient = useQueryClient();
 
   const [comment, setComment] = useState<{ commentBody: string }>({
     commentBody: "",
   });
 
-  const { mutate } = useMutation(["comments"], (comment: IComments) =>
-    CommentApi.post(comment)
+  const { mutate } = useMutation(
+    ["comments"],
+    (comment: IComments) => CommentApi.post(comment),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["comments"] });
+      },
+    }
   );
 
   const onClickHandler = () => {
