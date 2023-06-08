@@ -1,9 +1,9 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useCallback, useState } from "react";
 import { CommentApi } from "src/api/todo";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
-import { IComments, ITodo } from "src/typeing/type";
+import { ICommentEdit, IComments, ITodo } from "src/typeing/type";
 import { useParams } from "react-router-dom";
 
 const CommentList = () => {
@@ -24,7 +24,15 @@ const CommentList = () => {
     queryClient.invalidateQueries({ queryKey: ["comments"] });
   }, []);
 
-  const onEditComplete = useCallback(() => {}, []);
+  const { mutate } = useMutation(["comments"], (editComment: any) =>
+    CommentApi.edit(editComment)
+  );
+
+  const onEditComplete = useCallback((commentId: IComments) => {
+    const editComment = { id: commentId, comments: input };
+
+    mutate(editComment);
+  }, []);
 
   return (
     <StCommentContainer>
@@ -68,10 +76,7 @@ const CommentList = () => {
 
               <StButtonGroup>
                 <StButton
-                  onClick={
-                    () => onEditComplete()
-                    // el.id
-                  }
+                  onClick={() => onEditComplete(el.id)}
                   borderColor="teal"
                   width="50px"
                   height="30px"

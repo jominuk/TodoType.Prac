@@ -48,3 +48,8 @@ export interface TodoComment {
   todoId?: number | string;
   id?: number;
 }
+
+export interface ICommentEdit {
+  id?: string | number;
+  comment?: string | undefined;
+}

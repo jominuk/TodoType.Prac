@@ -63,4 +63,12 @@ export const CommentApi = {
     const res = await instance.delete(`/comments/${commentId}`);
     return res.data;
   },
+
+  edit: async (payload: IComments): Promise<void> => {
+    console.log(payload);
+    const res = await instance.patch(`/comments/${payload.id}`, {
+      comment: payload.comment,
+    });
+    return res.data;
+  },
 };
