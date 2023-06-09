@@ -28,11 +28,18 @@ const CommentList = () => {
     CommentApi.edit(editComment)
   );
 
-  const onEditComplete = useCallback((commentId: IComments) => {
-    const editComment = { id: commentId, comments: input };
+  const onEditComplete = (commentId: IComments) => {
+    const editComment = { comments: input, id: commentId };
 
-    mutate(editComment);
-  }, []);
+    mutate(editComment, {
+      onSuccess: () => {
+        setEditOn("");
+      },
+      onError: (error) => {
+        console.error("Error editing comment:", error);
+      },
+    });
+  };
 
   return (
     <StCommentContainer>

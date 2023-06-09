@@ -5,6 +5,7 @@ import {
   ITodoEdit,
   IComments,
   TodoComment,
+  ICommentEdit,
 } from "src/typeing/type";
 
 export const TodoApi = {
@@ -46,7 +47,6 @@ export const TodoApi = {
 
 export const CommentApi = {
   post: async (comment: IComments): Promise<IComments> => {
-    console.log(comment.todoId);
     const res = await instance.post(
       `/todos/${comment.todoId}/comments`,
       comment
@@ -64,7 +64,7 @@ export const CommentApi = {
     return res.data;
   },
 
-  edit: async (payload: IComments): Promise<void> => {
+  edit: async (payload: any): Promise<ICommentEdit> => {
     console.log(payload);
     const res = await instance.patch(`/comments/${payload.id}`, {
       comment: payload.comment,

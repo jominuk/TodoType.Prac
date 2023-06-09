@@ -51,5 +51,5 @@ export interface TodoComment {
 
 export interface ICommentEdit {
   id?: string | number;
-  comment?: string | undefined;
+  comment?: string | number | undefined;
 }
