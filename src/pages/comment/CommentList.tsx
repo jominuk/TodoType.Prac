@@ -32,7 +32,8 @@ const CommentList = () => {
     const editComment = { comments: input, id: commentId };
 
     mutate(editComment, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries(["comments"]);
         setEditOn("");
       },
       onError: (error) => {
