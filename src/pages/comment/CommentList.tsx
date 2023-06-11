@@ -3,7 +3,7 @@ import React, { useCallback, useState } from "react";
 import { CommentApi } from "src/api/todo";
 import styled from "styled-components";
 import StButton from "src/components/button/Button";
-import { ICommentEdit, IComments, ITodo } from "src/typeing/type";
+import { IComments } from "src/typeing/type";
 import { useParams } from "react-router-dom";
 
 const CommentList = () => {

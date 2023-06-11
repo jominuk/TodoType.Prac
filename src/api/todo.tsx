@@ -4,7 +4,6 @@ import {
   ITodoStatus,
   ITodoEdit,
   IComments,
-  TodoComment,
   ICommentEdit,
 } from "src/typeing/type";
 
@@ -59,12 +58,12 @@ export const CommentApi = {
     return res.data;
   },
 
-  delete: async (commentId: IComments): Promise<void> => {
+  delete: async (commentId: IComments): Promise<IComments> => {
     const res = await instance.delete(`/comments/${commentId}`);
     return res.data;
   },
 
-  edit: async (payload: any): Promise<ICommentEdit> => {
+  edit: async (payload: ICommentEdit): Promise<ICommentEdit> => {
     const res = await instance.patch(`/comments/${payload.id}`, {
       comment: payload.comment,
     });
