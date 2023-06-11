@@ -65,7 +65,6 @@ export const CommentApi = {
   },
 
   edit: async (payload: any): Promise<ICommentEdit> => {
-    console.log(payload);
     const res = await instance.patch(`/comments/${payload.id}`, {
       comment: payload.comment,
     });

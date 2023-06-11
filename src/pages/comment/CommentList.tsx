@@ -24,22 +24,24 @@ const CommentList = () => {
     queryClient.invalidateQueries({ queryKey: ["comments"] });
   }, []);
 
-  const { mutate } = useMutation(["comments"], (editComment: any) =>
-    CommentApi.edit(editComment)
-  );
-
-  const onEditComplete = (commentId: IComments) => {
-    const editComment = { comments: input, id: commentId };
-
-    mutate(editComment, {
-      onSuccess: (data) => {
+  const { mutate } = useMutation(
+    ["comments"],
+    (editComment: any) => CommentApi.edit(editComment),
+    {
+      onSuccess: () => {
         queryClient.invalidateQueries(["comments"]);
         setEditOn("");
       },
       onError: (error) => {
         console.error("Error editing comment:", error);
       },
-    });
+    }
+  );
+
+  const onEditComplete = (commentId: IComments) => {
+    const editComment = { comment: input, id: commentId };
+
+    mutate(editComment);
   };
 
   return (
